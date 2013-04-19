@@ -21,12 +21,15 @@
  */
 ClassLoader::addClasses(array
 (
+	// modules
 	'MetaModelAttributeNotelist'			=> 'system/modules/metamodels_notelist/MetaModelAttributeNotelist.php',
 	'TableMetaModelAttributeNotelist'		=> 'system/modules/metamodels_notelist/TableMetaModelAttributeNotelist.php',
 	'MetaModelTemplateNotelist'				=> 'system/modules/metamodels_notelist/MetaModelTemplateNotelist.php',
 	'MetaModelNotelist'						=> 'system/modules/metamodels_notelist/MetaModelNotelist.php',
 	'FormMetaModelNotelist'					=> 'system/modules/metamodels_notelist/FormMetaModelNotelist.php',
 	'TableFormFieldMetaModelsNotelist'		=> 'system/modules/metamodels_notelist/TableFormFieldMetaModelsNotelist.php',
+	'MetaModelNotelistVariants'				=> 'system/modules/metamodels_notelist/MetaModelNotelistVariants.php',
+
 ));
 
 
