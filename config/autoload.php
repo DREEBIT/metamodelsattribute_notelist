@@ -22,13 +22,13 @@
 ClassLoader::addClasses(array
 (
 	// modules
-	'MetaModelAttributeNotelist'			=> 'system/modules/metamodels_notelist/MetaModelAttributeNotelist.php',
-	'TableMetaModelAttributeNotelist'		=> 'system/modules/metamodels_notelist/TableMetaModelAttributeNotelist.php',
-	'MetaModelTemplateNotelist'				=> 'system/modules/metamodels_notelist/MetaModelTemplateNotelist.php',
-	'MetaModelNotelist'						=> 'system/modules/metamodels_notelist/MetaModelNotelist.php',
-	'FormMetaModelNotelist'					=> 'system/modules/metamodels_notelist/FormMetaModelNotelist.php',
-	'TableFormFieldMetaModelsNotelist'		=> 'system/modules/metamodels_notelist/TableFormFieldMetaModelsNotelist.php',
-	'MetaModelNotelistVariants'				=> 'system/modules/metamodels_notelist/MetaModelNotelistVariants.php',
+	'MetaModelAttributeNotelist'			=> 'system/modules/metamodelsattribute_notelist/MetaModelAttributeNotelist.php',
+	'TableMetaModelAttributeNotelist'		=> 'system/modules/metamodelsattribute_notelist/TableMetaModelAttributeNotelist.php',
+	'MetaModelTemplateNotelist'				=> 'system/modules/metamodelsattribute_notelist/MetaModelTemplateNotelist.php',
+	'MetaModelNotelist'						=> 'system/modules/metamodelsattribute_notelist/MetaModelNotelist.php',
+	'FormMetaModelNotelist'					=> 'system/modules/metamodelsattribute_notelist/FormMetaModelNotelist.php',
+	'TableFormFieldMetaModelsNotelist'		=> 'system/modules/metamodelsattribute_notelist/TableFormFieldMetaModelsNotelist.php',
+	'MetaModelNotelistVariants'				=> 'system/modules/metamodelsattribute_notelist/MetaModelNotelistVariants.php',
 
 ));
 
@@ -38,8 +38,8 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mm_attr_notelist_be'					=> 'system/modules/metamodels_notelist/templates',
-	'mm_attr_notelist_fe'					=> 'system/modules/metamodels_notelist/templates',
-	'form_mm_notelist'						=> 'system/modules/metamodels_notelist/templates',
-	'mail_mm_notelist'						=> 'system/modules/metamodels_notelist/templates',
+	'mm_attr_notelist_be'					=> 'system/modules/metamodelsattribute_notelist/templates',
+	'mm_attr_notelist_fe'					=> 'system/modules/metamodelsattribute_notelist/templates',
+	'form_mm_notelist'						=> 'system/modules/metamodelsattribute_notelist/templates',
+	'mail_mm_notelist'						=> 'system/modules/metamodelsattribute_notelist/templates',
 ));
