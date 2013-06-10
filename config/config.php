@@ -24,6 +24,15 @@ $GLOBALS['METAMODELS']['attributes']['notelist'] = array
 	'image' => 'system/modules/metamodels_notelist/html/letter-3-16.png'
 );
 
+/**
+ * Frontend filter
+ */
+$GLOBALS['METAMODELS']['filters']['notelistitems'] = array
+(
+	'class' => 'MetaModelFilterSettingNotelistItems',
+	'image' => 'system/modules/metamodelsattribute_notelist/html/letter-3-16.png',
+	#'info_callback' => array('TableMetaModelFilterSetting','infoCallback'),
+);
 
 /**
  * Form fields

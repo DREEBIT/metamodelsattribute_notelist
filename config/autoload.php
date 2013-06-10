@@ -29,7 +29,7 @@ ClassLoader::addClasses(array
 	'FormMetaModelNotelist'					=> 'system/modules/metamodelsattribute_notelist/FormMetaModelNotelist.php',
 	'TableFormFieldMetaModelsNotelist'		=> 'system/modules/metamodelsattribute_notelist/TableFormFieldMetaModelsNotelist.php',
 	'MetaModelNotelistVariants'				=> 'system/modules/metamodelsattribute_notelist/MetaModelNotelistVariants.php',
-
+	'ModuleModelNotelistList'				=> 'system/modules/metamodelsattribute_notelist/ModuleModelNotelistList.php',
 ));
 
 
