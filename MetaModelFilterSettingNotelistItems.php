@@ -36,11 +36,6 @@ class MetaModelFilterSettingNotelistItems extends MetaModelFilterSetting
 		// get notelist for this metamodel
 		$arrNotelist = $objMetaModelNotelist->getNotelist($objMetaModel->get('id'));
 		
-		if(count($arrNotelist) < 1)
-		{
-			return;
-		}
-		
 		$arrIds = array();
 		foreach($arrNotelist as $entry)
 		{
