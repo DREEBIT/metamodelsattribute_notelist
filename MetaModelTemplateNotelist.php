@@ -90,7 +90,7 @@ class MetaModelTemplateNotelist extends MetaModelTemplate
 		
 		//-- variants
 		$arrVariants = array();
-		if(count($objTemplate->attribute->get('notelist_variants')) > 0)
+		if($objTemplate->attribute->get('notelist_variants'))
 		{
 			$arrTemplateVariants = array();
 			
