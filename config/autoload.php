@@ -26,6 +26,7 @@ ClassLoader::addClasses(array
 	'TableMetaModelAttributeNotelist'		=> 'system/modules/metamodelsattribute_notelist/TableMetaModelAttributeNotelist.php',
 	'MetaModelTemplateNotelist'				=> 'system/modules/metamodelsattribute_notelist/MetaModelTemplateNotelist.php',
 	'MetaModelNotelist'						=> 'system/modules/metamodelsattribute_notelist/MetaModelNotelist.php',
+	'MetaModelNotelistHooks'				=> 'system/modules/metamodelsattribute_notelist/MetaModelNotelistHooks.php',
 	'FormMetaModelNotelist'					=> 'system/modules/metamodelsattribute_notelist/FormMetaModelNotelist.php',
 	'TableFormFieldMetaModelsNotelist'		=> 'system/modules/metamodelsattribute_notelist/TableFormFieldMetaModelsNotelist.php',
 	'MetaModelNotelistVariants'				=> 'system/modules/metamodelsattribute_notelist/MetaModelNotelistVariants.php',

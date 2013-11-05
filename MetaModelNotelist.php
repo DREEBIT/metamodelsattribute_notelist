@@ -16,15 +16,25 @@
  */
 
 /**
+ * Imports
+ */
+use \MetaModelNotelistHooks as Hooks;
+
+/**
  * Class MetaModelNotelist
  *
  * Provide various functions for the metamodels_notelist
  * @package		metamodels_notelist
  * @author		Tim Gatzky <info@tim-gatzky.de>
  */
- 
-class MetaModelNotelist extends Frontend
+class MetaModelNotelist extends \System
 {
+	/**
+	 * Session node
+	 * @var string
+	 */
+	protected $strSession	= 'metamodelnotelist';
+	
 	/**
 	 * @var MetaModelNotelist
 	 */
@@ -43,54 +53,7 @@ class MetaModelNotelist extends Frontend
 		}
 		return self::$objInstance;
 	}
-	
 		
-	/**
-	 * Insert items in notelist from submitted notelist forms
-	 * @param object
-	 * @param object
-	 * @param object
-	 * called from generatePage HOOK
-	 */
-	#public function formSubmitListener(Database_Result $objPage, Database_Result $objLayout, PageRegular $objPageRegular)
-	#{
-	#	// declare libraries
-	#	$objSession = Session::getInstance();
-	#	$objInput = Input::getInstance();
-	#	
-	#	if(strpos($objInput->post('FORM_SUBMIT'), 'mm_notelist') !== 0)
-	#	{
-	#		return;
-	#	}
-	#	
-	#	$strFormID = $objInput->post('FORM_SUBMIT');
-	#	$intAmount = $objInput->post($strFormID.'_amount');
-	#	$intItem = $objInput->post('ITEM_ID');
-	#	$intMetaModel = $objInput->post('METAMODEL_ID');
-	#	
-	#	// insert or update an item
-	#	if( strlen($objInput->post('ADD_NOTELIST_ITEM')) > 0 || strlen($objInput->post('UPDATE_NOTELIST_ITEM')) > 0 )
-	#	{
-	#		// validate amount
-	#		$arrData=array('eval'=>array('rgxp' => 'digit', 'mandatory'=>true));
-	#		$objWidgetAmount=new FormTextField($this->prepareForWidget($arrData, $strFormID.'_amount', $intAmount, $strFormID.'_amount'));
-	#		$objWidgetAmount->validate();
-	#		if($objWidgetAmount->hasErrors())
-	#		{
-	#			return;
-	#		}
-	#	
-	#		$this->setItem($intMetaModel,$intItem,$intAmount);
-	#	}
-	#	// remove an item
-	#	else if(strlen($objInput->post('REMOVE_NOTELIST_ITEM')) > 0)
-	#	{
-	#		// set item
-	#		$this->removeItem($intMetaModel,$intItem);
-	#	}
-	#	else {}
-	#}
-	
 	
 	/**
 	 * Insert/update an item in the notelist
@@ -103,21 +66,25 @@ class MetaModelNotelist extends Frontend
 	public function setItem($intMetaModel,$intItem,$intAmount=0,$arrVariants=array(),$blnReload=true)
 	{
 		// get Session
-		$objSession = Session::getInstance();
-		$arrSession = $objSession->get('metamodels_notelist');
+		$objSession = \Session::getInstance();
+		$arrSession = $objSession->get($this->strSession);
 		
+		$time = time();
 		
 		$arrSession[$intMetaModel][$intItem] = array
 		(
-			'tstamp'	=> time(),
+			'tstamp'	=> $time,
 			'id'		=> $intItem,
 			'metamodel'	=> $intMetaModel,
 			'amount'	=> ($intAmount < 0 || !$intAmount ? 0 : $intAmount),
 			'variants'	=> $arrVariants,
 		);
 		
+		// HOOK allow other extensions to manipulate the session
+		$arrSession =  Hooks::getInstance()->callSetItemHook($arrSession,$intMetaModel,$intItem,$intAmount,$arrVariants);
+		
 		// set Session
-		$objSession->set('metamodels_notelist',$arrSession);
+		$objSession->set($this->strSession,$arrSession);
 		
 		if($blnReload)
 		{
@@ -131,14 +98,13 @@ class MetaModelNotelist extends Frontend
 	 * Get an item from the notelist and return as array
 	 * @param integer
 	 * @param integer
-	 * @param integer
 	 * @return array
 	 */
 	public function getItem($intMetaModel,$intItem)
 	{
 		// get Session
 		$objSession = Session::getInstance();
-		$arrSession = $objSession->get('metamodels_notelist');
+		$arrSession = $objSession->get($this->strSession);
 		
 		return $arrSession[$intMetaModel][$intItem];
 	}
@@ -148,17 +114,21 @@ class MetaModelNotelist extends Frontend
 	 * Remove an item from notelist
 	 * @param integer
 	 * @param integer
+	 * @param boolean
 	 */
 	public function removeItem($intMetaModel,$intItem,$blnReload=true)
 	{
 		// get Session
-		$objSession = Session::getInstance();
-		$arrSession = $objSession->get('metamodels_notelist');
+		$objSession = \Session::getInstance();
+		$arrSession = $objSession->get($this->strSession);
 		
 		unset($arrSession[$intMetaModel][$intItem]);
 		
+		// HOOK tell other extensions an item has been removed
+		Hooks::getInstance()->callRemoveItemHook($arrSession,$intMetaModel,$intItem);
+		
 		// set Session
-		$objSession->set('metamodels_notelist',$arrSession);
+		$objSession->set($this->strSession,$arrSession);
 		
 		if($blnReload)
 		{
@@ -170,13 +140,14 @@ class MetaModelNotelist extends Frontend
 		
 	/**
 	 * Get all items from current notelist and return as array
+	 * @param integer
 	 * @return array
 	 */
 	public function getNotelist($intNotelist=0)
 	{
 		// Session
 		$objSession = Session::getInstance();
-		$arrSession = $objSession->get('metamodels_notelist');
+		$arrSession = $objSession->get($this->strSession);
 		
 		if(!is_array($arrSession) || count($arrSession) < 1 )
 		{
@@ -246,7 +217,7 @@ class MetaModelNotelist extends Frontend
 	public function prepareDataForWidget($intMetaModel,$intItem,$arrVisibles=array())
 	{
 		// get metamodel
-		$objMetaModel = MetaModelFactory::byId($intMetaModel);
+		$objMetaModel = \MetaModelFactory::byId($intMetaModel);
 		
 		if(!$objMetaModel)
 		{
