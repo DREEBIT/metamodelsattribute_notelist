@@ -342,7 +342,6 @@ class FormMetaModelNotelist extends Widget
 						}
 					}
 					
-					#FB::log($amount);
 					// create a psydo amount input field to valide input
 					$arrData=array('eval'=>array('rgxp' => 'digit', 'mandatory'=>true));
 					$objAmountWidget=new FormTextField($this->prepareForWidget($arrData, $strId.'_amount', $amount, $strId.'_amount'));
