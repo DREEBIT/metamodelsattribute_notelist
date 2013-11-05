@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 /**
  * Contao 
  * German translation file 
@@ -29,6 +29,3 @@ $GLOBALS['TL_LANG']['tl_form_field']['metamodels_notelist_formTpl']		= array('Au
 $GLOBALS['TL_LANG']['tl_form_field']['metamodels_notelist_mailTpl']		= array('Mail-Template','Wählen Sie hier das Mail-Template.');
 $GLOBALS['TL_LANG']['tl_form_field']['metamodels_notelist_metamodel']	= array('MetaModel auswählen','Wählen Sie hier das MetaModel aus.');
 $GLOBALS['TL_LANG']['tl_form_field']['metamodels_notelist_visibles']	= array('Sichbare Felder','Wählen Sie hier die sichtbaren Felder aus.');
-
-
-?>
