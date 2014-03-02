@@ -1,6 +1,0 @@
-<?php
-/**
- * MetaModel notelist backend template
- */
-?>
-<span class="text"><?php echo $this->raw; ?></span>

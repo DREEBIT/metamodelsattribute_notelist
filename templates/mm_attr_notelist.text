@@ -1,2 +1,0 @@
-<?php if(!$this->includeNotelist) return ''; ?>
-<?php echo $this->raw['value']; ?>
