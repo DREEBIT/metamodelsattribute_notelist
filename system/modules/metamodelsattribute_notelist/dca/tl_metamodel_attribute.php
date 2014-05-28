@@ -38,4 +38,5 @@ $GLOBALS['TL_DCA']['tl_metamodel_attribute']['fields']['notelist_variants'] = ar
 	'inputType'             => 'checkbox',
 	'options_callback'      => array('TableMetaModelsAttributeNotelist', 'getVariantAttributes'),
 	'eval'                  => array('tl_class'=>'','multiple'=>true),
+	'sql'					=> "blob NULL"
 );

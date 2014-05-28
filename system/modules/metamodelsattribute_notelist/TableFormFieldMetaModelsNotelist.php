@@ -19,7 +19,7 @@
  *
  * @author		Tim Gatzky <info@tim-gatzky.de>
  */
-class TableFormFieldMetaModelsNotelist extends Backend
+class TableFormFieldMetaModelsNotelist extends \Backend
 {
 	/**
 	 * Return all metamodels as array

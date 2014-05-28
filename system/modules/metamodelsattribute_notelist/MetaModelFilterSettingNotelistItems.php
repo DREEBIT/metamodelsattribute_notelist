@@ -15,6 +15,8 @@
  * @filesource
  */
 
+use MetaModels\Filter\Rules\StaticIdList;
+
 /**
  * Filter setting for MetaModel to parse only items from the notelist to the lister module
  *
@@ -42,6 +44,6 @@ class MetaModelFilterSettingNotelistItems extends MetaModelFilterSetting
 		}
 		
 		// set filter
-		$objFilter->addFilterRule(new MetaModelFilterRuleStaticIdList($arrIds));
+		$objFilter->addFilterRule(new StaticIdList($arrIds));
 	}
 }

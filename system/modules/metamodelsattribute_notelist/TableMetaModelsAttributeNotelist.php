@@ -23,7 +23,9 @@
  * @author      Tim Gatzky <info@tim-gatzky.de>
  */
 
-class TableMetaModelsAttributeNotelist extends TableMetaModelAttribute
+use DcGeneral\DataContainerInterface;
+
+class TableMetaModelsAttributeNotelist
 {
 	/**
 	 * @var TableMetaModelsAttributeNotelist
@@ -56,11 +58,11 @@ class TableMetaModelsAttributeNotelist extends TableMetaModelAttribute
 	 * Get attributes for notelist variants of the current metamodel and return as array
 	 * @return array
 	 */
-	public function getVariantAttributes(DataContainer $objDC)
+	public function getVariantAttributes(DataContainerInterface $objDC)
 	{
 		$objDatabase = Database::getInstance();
 		
-		$objAttr = $objDC->getCurrentModel();
+		$objAttr = $objDC->getEnvironment()->getCurrentModel();
 		
 		// fetch possible variants attributes (selects, tags)
 		$objAttributes = $objDatabase->prepare("SELECT * FROM tl_metamodel_attribute WHERE pid=? AND ".$objDatabase->findInSet('type',$this->arrVariantAttributes))
@@ -89,9 +91,9 @@ class TableMetaModelsAttributeNotelist extends TableMetaModelAttribute
 	 * @param DataContainer
 	 * @return array
 	 */
-	public function getNotelistTemplates(DataContainer $objDC)
+	public function getNotelistTemplates(DataContainerInterface $objDC)
 	{
-		$objThis = $objDC->getCurrentModel();
+		$objThis = $objDC->getEnvironment()->getCurrentModel();
 		
 		if ($this->Input->get('act') == 'overrideAll')
 		{

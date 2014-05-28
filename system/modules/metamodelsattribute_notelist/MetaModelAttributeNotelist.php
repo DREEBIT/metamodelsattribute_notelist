@@ -23,13 +23,19 @@
  * @author      Tim Gatzky <info@tim-gatzky.de>
  */
 
-class MetaModelAttributeNotelist extends MetaModelAttributeSimple
+use MetaModels\Attribute\BaseSimple;
+use MetaModels\Render\Template;
+
+class MetaModelAttributeNotelist extends BaseSimple
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	public function getSQLDataType()
 	{
-		return 'char(1) NOT NULL default \'\'';
+		return "char(1) NOT NULL default ''";
 	}
-
+	
 	public function getAttributeSettingNames()
 	{
 		return array_merge(parent::getAttributeSettingNames(), array

@@ -15,6 +15,8 @@
  * @filesource
  */
 
+use MetaModels\Render\Template;
+
 /**
  * MetaModels subpackage
  *
@@ -23,7 +25,7 @@
  * @author      Tim Gatzky <info@tim-gatzky.de>
  */
  
-class MetaModelTemplateNotelist extends MetaModelTemplate
+class MetaModelTemplateNotelist extends Template
 {
 	/**
 	 * Add template vars

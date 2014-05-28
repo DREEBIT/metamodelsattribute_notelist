@@ -37,4 +37,5 @@ TemplateLoader::addFiles(array
 	'mail_mm_notelist'    => 'system/modules/metamodelsattribute_notelist/templates',
 	'mm_attr_notelist_be' => 'system/modules/metamodelsattribute_notelist/templates',
 	'mm_attr_notelist_fe' => 'system/modules/metamodelsattribute_notelist/templates',
+	'mm_attr_notelist'    => 'system/modules/metamodelsattribute_notelist/templates',
 ));
