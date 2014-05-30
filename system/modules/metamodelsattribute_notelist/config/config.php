@@ -21,7 +21,7 @@
 $GLOBALS['METAMODELS']['attributes']['notelist'] = array
 (
 	'class' => 'MetaModelAttributeNotelist',
-	'image' => 'system/modules/metamodels_notelist/html/letter-3-16.png'
+	'image' => 'system/modules/metamodelsattribute_notelist/html/letter-3-16.png'
 );
 
 /**
