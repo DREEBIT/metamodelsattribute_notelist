@@ -15,7 +15,10 @@
  * @filesource
  */
 
+
 use MetaModels\Filter\Rules\StaticIdList;
+use \MetaModels\Filter\IFilter as IMetaModelFilter;
+
 
 /**
  * Filter setting for MetaModel to parse only items from the notelist to the lister module
@@ -25,7 +28,7 @@ use MetaModels\Filter\Rules\StaticIdList;
  * @author      Tim Gatzky <info@tim-gatzky.de>
  */
 
-class MetaModelFilterSettingNotelistItems extends MetaModelFilterSetting
+class MetaModelFilterSettingNotelistItems extends \MetaModels\Filter\Setting\Simple
 {
 	/* (non-PHPdoc)
 	 * @see IMetaModelFilterSetting::prepareRules()
