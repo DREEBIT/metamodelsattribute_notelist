@@ -104,6 +104,10 @@ class MetaModelTemplateNotelist extends Template
 			{
 				// metamodel attribute instance
 				$objVariantAttr = $objTemplate->attribute->getMetaModel()->getAttributeById($intVariantAttrId);
+				if(!$objVariantAttr)
+				{
+					continue;
+				}
 				
 				$strName = $objVariantAttr->get('colname').'_'.$objAttr->get('pid').'_'.$arrRow['id'];				
 				
