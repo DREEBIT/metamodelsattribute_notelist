@@ -5,7 +5,7 @@
 ?>
 <?php if(!$this->includeNotelist) return ''; ?>
 
-<?php if(TL_MODE == 'FE'): ?>
+<?php if(TL_MODE == 'BE'): ?>
 <span class="text"><?php echo $this->raw; ?></span>
 <?php endif; ?>
 
