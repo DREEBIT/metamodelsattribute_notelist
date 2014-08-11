@@ -77,8 +77,14 @@ class TableMetaModelsAttributeNotelist
 		while($objAttributes->next())
 		{
 			$arrName = deserialize($objAttributes->name);
-			$strName = ($arrName[$GLOBALS['TL_LANGUAGE']] ? $arrName[$GLOBALS['TL_LANGUAGE']] : $objAttributes->type . $objAttributes->id);
-			
+			if($arrName)
+			{
+				$strName = ($arrName[$GLOBALS['TL_LANGUAGE']] ? $arrName[$GLOBALS['TL_LANGUAGE']] : $objAttributes->type . $objAttributes->id);
+			}
+			else
+			{
+				$strName = $objAttributes->type . ' (id='.$objAttributes->id.')';
+			}
 			$arrReturn[$objAttributes->id] = $strName;
 		}
 		
