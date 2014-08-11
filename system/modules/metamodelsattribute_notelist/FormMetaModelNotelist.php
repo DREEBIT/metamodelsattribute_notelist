@@ -13,6 +13,11 @@
  */
 
 /**
+ * Imports
+ */
+use \MetaModels\Factory as MetaModelFactory;
+
+/**
  * Class FormMetaModelNotelist
  *
  * @author		Tim Gatzky <info@tim-gatzky.de>

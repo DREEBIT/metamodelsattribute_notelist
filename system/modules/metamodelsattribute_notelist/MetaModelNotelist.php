@@ -19,6 +19,7 @@
  * Imports
  */
 use \MetaModelNotelistHooks as Hooks;
+use \MetaModels\Factory as MetaModelFactory;
 
 /**
  * Class MetaModelNotelist
@@ -217,7 +218,7 @@ class MetaModelNotelist extends \System
 	public function prepareDataForWidget($intMetaModel,$intItem,$arrVisibles=array())
 	{
 		// get metamodel
-		$objMetaModel = \MetaModelFactory::byId($intMetaModel);
+		$objMetaModel = MetaModelFactory::byId($intMetaModel);
 		
 		if(!$objMetaModel)
 		{
