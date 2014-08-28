@@ -21,5 +21,5 @@ Installation
 Release note and MM version
 ---
 
-- MetaModels [contao3] (cfe4e0ea96790bc23a77b2b32354cec6a731a092)
-- DC_General [contao3] (50d65bf5472fb248a17af7f2b5cff1b0f028f23f)
+- MetaModels/contao3 [cfe4e0e]
+- DC_General/contao3 [50d65bf]
