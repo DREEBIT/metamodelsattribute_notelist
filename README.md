@@ -17,3 +17,9 @@ Installation
 - Enable the notelist attribute as any other mm attribute
 - The notelist comes with a formular field. In case you want to send notelist data via email.
 - If you want to filter your mm list to show only notelist data: Create a new notelist filter.
+
+Release note and MM version
+---
+
+- MetaModels [contao3] (cfe4e0ea96790bc23a77b2b32354cec6a731a092)
+- DC_General [contao3] (50d65bf5472fb248a17af7f2b5cff1b0f028f23f)
