@@ -47,10 +47,12 @@ class MetaModelAttributeNotelist extends BaseSimple
 
 	public function getFieldDefinition($arrOverrides = array())
 	{
+		\System::loadLanguageFile('default');
+		
 		$arrFieldDef = parent::getFieldDefinition($arrOverrides);
 		$arrFieldDef['inputType'] = 'radio';
 		$arrFieldDef['default'] = 1;
-		$arrFieldDef['options'] = array(1=>$GLOBALS['TL_LANG']['metamodels_notelist']['insertNotelistOption']);
+		$arrFieldDef['options'] = array(1=>$GLOBALS['TL_LANG']['metamodels_notelist']['insertNotelistOption'] ?: 'Insert notelist');
 		$arrFieldDef['eval']['includeBlankOption'] = true;
 		return $arrFieldDef;
 	} 

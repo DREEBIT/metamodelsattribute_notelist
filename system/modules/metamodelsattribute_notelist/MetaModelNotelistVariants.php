@@ -59,7 +59,7 @@ class MetaModelNotelistVariants extends MetaModelNotelist
 			case 'select':
 				$arrFieldDef['options'] = $this->getOptions($arrFieldDef);
 				
-				$objWidget = new FormSelectMenu($arrFieldDef);
+				$objWidget = new \FormSelectMenu($arrFieldDef);
 				$objWidget->__set('id',($arrFieldDef['id'] ? $arrFieldDef['id'] : $objAttribute->get('id')) );
 				$objWidget->__set('name',($arrFieldDef['name'] ? $arrFieldDef['name'] : $objAttribute->get('colname')) );
 				#$objWidget->__set('label',$arrFieldDef['label'][0]);
@@ -68,7 +68,7 @@ class MetaModelNotelistVariants extends MetaModelNotelist
 			case 'checkbox':
 				$arrFieldDef['options'] = $this->getOptions($arrFieldDef);
 				
-				$objWidget = new FormCheckbox($arrFieldDef);
+				$objWidget = new \FormCheckbox($arrFieldDef);
 				$objWidget->__set('id',($arrFieldDef['id'] ? $arrFieldDef['id'] : $objAttribute->get('id')) );
 				$objWidget->__set('name',($arrFieldDef['name'] ? $arrFieldDef['name'] : $objAttribute->get('colname')) );
 				$objWidget->__set('label',$arrFieldDef['label'][0]);
@@ -77,7 +77,7 @@ class MetaModelNotelistVariants extends MetaModelNotelist
 			case 'radio':
 				$arrFieldDef['options'] = $this->getOptions($arrFieldDef);
 				
-				$objWidget = new FormRadioButton($arrFieldDef);
+				$objWidget = new \FormRadioButton($arrFieldDef);
 				$objWidget->__set('id',($arrFieldDef['id'] ? $arrFieldDef['id'] : $objAttribute->get('id')) );
 				$objWidget->__set('name',($arrFieldDef['name'] ? $arrFieldDef['name'] : $objAttribute->get('colname')) );
 				$objWidget->__set('label',$arrFieldDef['label'][0]);

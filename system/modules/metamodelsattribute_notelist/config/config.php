@@ -48,6 +48,7 @@ array_insert($GLOBALS['TL_FFL'],14,array
  */
 $GLOBALS['METAMODEL_HOOKS']['parseTemplate'][] 		= array('MetaModelTemplateNotelist','parseTemplateCallback');
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][] 		= array('MetaModelNotelist', 'replaceTags'); 
+$GLOBALS['TL_HOOKS']['processFormData'][] 			= array('MetaModelNotelist', 'clearAfterFormSubmit'); 
 
 
 /**
@@ -55,3 +56,4 @@ $GLOBALS['TL_HOOKS']['replaceInsertTags'][] 		= array('MetaModelNotelist', 'repl
  */
 $GLOBALS['metamodels_notelist']['default_amount']	= 1;
 $GLOBALS['metamodels_notelist']['autoReloadPage']	= true; // reload the page when amount is being updated or an item is placed on the notelist
+$GLOBALS['metamodels_notelist']['clearAfterFormSubmit']	= false;

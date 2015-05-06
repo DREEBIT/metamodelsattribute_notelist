@@ -41,8 +41,9 @@ class MetaModelTemplateNotelist extends Template
 		$blnReload = $GLOBALS['metamodels_notelist']['autoReloadPage'];
 		
 		// declare libraries
-		$objSession = Session::getInstance();
-		$objInput = Input::getInstance();
+		$objSession = \Session::getInstance();
+		$objInput = \Input::getInstance();
+		$objDatabase = \Database::getInstance();
 		
 		#$objSession->remove('metamodels_notelist');
 		#return ;
@@ -52,6 +53,11 @@ class MetaModelTemplateNotelist extends Template
 		
 		// record
 		$arrRow = $objTemplate->row;
+		
+		//
+		$objActiveRecord = $objDatabase->prepare("SELECT * FROM ".$objAttr->getMetaModel()->get('tableName')." WHERE id=?")
+						->limit(1)
+						->execute($arrRow['id']);
 		
 		$objTemplate->includeNotelist = true;
 		if(!$arrRow[$objAttr->get('colname')])
@@ -89,7 +95,6 @@ class MetaModelTemplateNotelist extends Template
 		$objTemplate->amountInput = $objWidgetAmount->generate();
 		$objTemplate->amountLabel = sprintf('<label for="ctrl_%s">%s</label>',$objWidgetAmount->id,$GLOBALS['TL_LANG']['metamodels_notelist']['amountLabel']);
 		
-		
 		//-- variants
 		$arrVariants = array();
 		if($objTemplate->attribute->get('notelist_variants'))
@@ -109,6 +114,12 @@ class MetaModelTemplateNotelist extends Template
 					continue;
 				}
 				
+				$varValues = deserialize($objActiveRecord->{$objVariantAttr->get('colname')});
+				if(!is_array($arrValues))
+				{
+					$varValues = explode(',', $varValues);
+				}
+
 				$strName = $objVariantAttr->get('colname').'_'.$objAttr->get('pid').'_'.$arrRow['id'];				
 				
 				// generate widget
@@ -117,6 +128,7 @@ class MetaModelTemplateNotelist extends Template
 					'id'	=> $objAttr->get('pid').'_'.$arrRow['id'].'_'.$objVariantAttr->get('id'),
 					'name'	=> $strName,
 					'value'	=> $arrItem['variants'][$strName]['value'],
+					'options'	=> $varValues,
 				);
 				$arrFieldDef = array_merge($objVariantAttr->getFieldDefinition(),$arrFieldDef);
 				

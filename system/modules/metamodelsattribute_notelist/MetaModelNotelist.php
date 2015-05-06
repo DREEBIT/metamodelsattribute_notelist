@@ -305,6 +305,17 @@ class MetaModelNotelist extends \System
 	}
 
 	
-	
+	/**
+	 * Clear the notelist after submitting
+	 */
+	public function clearAfterFormSubmit($arrSubmitted)
+	{
+		if(!$GLOBALS['metamodels_notelist']['clearAfterFormSubmit'])
+		{
+			return $arrSubmitted;
+		}
+		
+		$arrSession = \Session::getInstance()->set('metamodelnotelist',array());
+	}
 
 }

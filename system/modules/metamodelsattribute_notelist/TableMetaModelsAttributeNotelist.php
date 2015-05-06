@@ -23,9 +23,9 @@
  * @author      Tim Gatzky <info@tim-gatzky.de>
  */
 
-use DcGeneral\DataContainerInterface;
+#use DcGeneral\DataContainerInterface;
 
-class TableMetaModelsAttributeNotelist
+class TableMetaModelsAttributeNotelist extends \Backend
 {
 	/**
 	 * @var TableMetaModelsAttributeNotelist
@@ -58,15 +58,16 @@ class TableMetaModelsAttributeNotelist
 	 * Get attributes for notelist variants of the current metamodel and return as array
 	 * @return array
 	 */
-	public function getVariantAttributes(DataContainerInterface $objDC)
+	public function getVariantAttributes($objDC)
 	{
-		$objDatabase = Database::getInstance();
+		$objDatabase = \Database::getInstance();
 		
-		$objAttr = $objDC->getEnvironment()->getCurrentModel();
+		$arrMM = explode('::',\Input::get('pid'));
+		$intPid = $arrMM[1];
 		
 		// fetch possible variants attributes (selects, tags)
 		$objAttributes = $objDatabase->prepare("SELECT * FROM tl_metamodel_attribute WHERE pid=? AND ".$objDatabase->findInSet('type',$this->arrVariantAttributes))
-						->execute($objAttr->getProperty('pid'));
+						->execute($intPid);
 		
 		if($objAttributes->numRows < 1)
 		{
@@ -77,13 +78,13 @@ class TableMetaModelsAttributeNotelist
 		while($objAttributes->next())
 		{
 			$arrName = deserialize($objAttributes->name);
-			if($arrName)
+			if(is_array($arrName))
 			{
 				$strName = ($arrName[$GLOBALS['TL_LANGUAGE']] ? $arrName[$GLOBALS['TL_LANGUAGE']] : $objAttributes->type . $objAttributes->id);
 			}
 			else
 			{
-				$strName = $objAttributes->type . ' (id='.$objAttributes->id.')';
+				$strName = $arrName . ' '.$objAttributes->type . ' (id='.$objAttributes->id.')';
 			}
 			$arrReturn[$objAttributes->id] = $strName;
 		}
