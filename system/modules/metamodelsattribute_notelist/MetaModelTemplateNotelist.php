@@ -87,6 +87,7 @@ class MetaModelTemplateNotelist extends Template
 		// get item from notelist and set amount value
 		$arrItem = $objMetaModelNotelist->getItem($objAttr->get('pid'),$arrRow['id']);
 		$amount = ($arrItem['amount'] ? $arrItem['amount'] : $GLOBALS['metamodels_notelist']['default_amount']);
+		$objTemplate->amount =  $amount;
 		
 		// create amount widget
 		$arrData=array('eval'=>array('rgxp' => 'digit', 'mandatory'=>true));
