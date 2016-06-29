@@ -47,8 +47,8 @@ array_insert($GLOBALS['TL_FFL'],14,array
  * Hooks
  */
 $GLOBALS['METAMODEL_HOOKS']['parseTemplate'][] 		= array('MetaModelTemplateNotelist','parseTemplateCallback');
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][] 		= array('MetaModelNotelist', 'replaceTags'); 
-$GLOBALS['TL_HOOKS']['processFormData'][] 			= array('MetaModelNotelist', 'clearAfterFormSubmit'); 
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] 		= array('MetaModelNotelist', 'replaceTags');
+$GLOBALS['TL_HOOKS']['processFormData'][] 			= array('MetaModelNotelist', 'clearAfterFormSubmit');
 
 
 /**

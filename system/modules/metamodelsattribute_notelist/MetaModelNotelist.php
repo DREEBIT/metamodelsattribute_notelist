@@ -35,7 +35,7 @@ class MetaModelNotelist extends \System
 	 * @var string
 	 */
 	protected $strSession	= 'metamodelnotelist';
-	
+
 	/**
 	 * @var MetaModelNotelist
 	 */
@@ -54,8 +54,8 @@ class MetaModelNotelist extends \System
 		}
 		return self::$objInstance;
 	}
-		
-	
+
+
 	/**
 	 * Insert/update an item in the notelist
 	 * @param integer
@@ -69,9 +69,9 @@ class MetaModelNotelist extends \System
 		// get Session
 		$objSession = \Session::getInstance();
 		$arrSession = $objSession->get($this->strSession);
-		
+
 		$time = time();
-		
+
 		$arrSession[$intMetaModel][$intItem] = array
 		(
 			'tstamp'	=> $time,
@@ -80,21 +80,21 @@ class MetaModelNotelist extends \System
 			'amount'	=> ($intAmount < 0 || !$intAmount ? 0 : $intAmount),
 			'variants'	=> $arrVariants,
 		);
-		
+
 		// HOOK allow other extensions to manipulate the session
 		$arrSession =  Hooks::getInstance()->callSetItemHook($arrSession,$intMetaModel,$intItem,$intAmount,$arrVariants);
-		
+
 		// set Session
 		$objSession->set($this->strSession,$arrSession);
-		
+
 		if($blnReload)
 		{
-			// reload the page to see changes	
+			// reload the page to see changes
 			$this->reload();
 		}
 	}
-	
-	
+
+
 	/**
 	 * Get an item from the notelist and return as array
 	 * @param integer
@@ -106,11 +106,11 @@ class MetaModelNotelist extends \System
 		// get Session
 		$objSession = Session::getInstance();
 		$arrSession = $objSession->get($this->strSession);
-		
+
 		return $arrSession[$intMetaModel][$intItem];
 	}
-	
-	
+
+
 	/**
 	 * Remove an item from notelist
 	 * @param integer
@@ -122,23 +122,23 @@ class MetaModelNotelist extends \System
 		// get Session
 		$objSession = \Session::getInstance();
 		$arrSession = $objSession->get($this->strSession);
-		
+
 		unset($arrSession[$intMetaModel][$intItem]);
-		
+
 		// HOOK tell other extensions an item has been removed
 		Hooks::getInstance()->callRemoveItemHook($arrSession,$intMetaModel,$intItem);
-		
+
 		// set Session
 		$objSession->set($this->strSession,$arrSession);
-		
+
 		if($blnReload)
 		{
-			// reload the page to see changes	
+			// reload the page to see changes
 			$this->reload();
 		}
 	}
-	
-		
+
+
 	/**
 	 * Get all items from current notelist and return as array
 	 * @param integer
@@ -149,18 +149,18 @@ class MetaModelNotelist extends \System
 		// Session
 		$objSession = Session::getInstance();
 		$arrSession = $objSession->get($this->strSession);
-		
+
 		if(!is_array($arrSession) || count($arrSession) < 1 )
 		{
 			return array();
 		}
-		
+
 		// set to a certain notelist node
 		if($intNotelist > 0 && count($arrSession[$intNotelist]) > 0)
 		{
 			$arrSession = $arrSession[$intNotelist];
 		}
-		
+
 		// clean out notelist session
 		$arrReturn = array();
 		foreach($arrSession as $id => $entries)
@@ -171,11 +171,11 @@ class MetaModelNotelist extends \System
 			}
 			$arrReturn[$id] = $entries;
 		}
-		
+
 		return $arrReturn;
 	}
-	
-	
+
+
 	/**
 	 * Returns true if an element is already in the notelist
 	 * @param integer
@@ -185,12 +185,12 @@ class MetaModelNotelist extends \System
 	public function isInNotelist($intMetaModel, $intItem)
 	{
 		$arrNotelist = $this->getNotelist();
-		
+
 		if(isset($arrNotelist[$intMetaModel][$intItem]) && count($arrNotelist[$intMetaModel][$intItem]) > 0)
 		{
 			return true;
 		}
-		
+
 		#if(count($intMetaModel) < 1 || count($arrNotelist[$intMetaModel]) < 1)
 		#{
 		#	return false;
@@ -203,11 +203,11 @@ class MetaModelNotelist extends \System
 		#		return true;
 		#	}
 		#}
-		
+
 		return false;
 	}
-	
-	
+
+
 	/**
 	 * Fetch the data from a metamodel and return a prepared array
 	 * @param integer
@@ -218,26 +218,29 @@ class MetaModelNotelist extends \System
 	public function prepareDataForWidget($intMetaModel,$intItem,$arrVisibles=array())
 	{
 		// get metamodel
-		$objMetaModel = MetaModelFactory::byId($intMetaModel);
-		
+		$factory = $this->getServiceContainer()->getFactory();
+		$name = $factory->translateIdToMetaModelName($intMetaModel);
+		$objMetaModel = $factory->getMetaModel($name);
+
 		if(!$objMetaModel)
 		{
 			return array();
 		}
-		
+
 		// get column names for visible attributes
 		$arrTmp = array();
 		if(count($arrVisibles) > 0)
 		{
+			// var_dump($arrVisibles);
 			foreach($arrVisibles as $id)
 			{
 				$objAttr = $objMetaModel->getAttributeById($id);
 				$arrTmp[] = $objAttr->getColName(); #$attr->get('colname');
-			}	
+			}
 		}
 		$arrVisibles = $arrTmp;
 		unset($arrTmp);
-		
+
 		// #issue: $arrOnlyAttr not working the way it meant to be -> its not filtering attributes
 		// get metamodelitem object
 		$objMetaModelItem = $objMetaModel->findById($intItem,$arrVisibles);
@@ -246,7 +249,7 @@ class MetaModelNotelist extends \System
 		{
 			return array();
 		}
-		
+
 		// parse only visible fields and store in array
 		$arrReturn = array();
 		if(count($arrVisibles) > 0)
@@ -254,7 +257,7 @@ class MetaModelNotelist extends \System
 			foreach($arrVisibles as $attr)
 			{
 				$objAttr = $objMetaModelItem->getAttribute($attr);
-				
+
 				$arrReturn[$attr] = array
 				(
 					'label' => $objAttr->getName(),
@@ -265,11 +268,11 @@ class MetaModelNotelist extends \System
 				);
 			}
 		}
-		
+
 		return $arrReturn;
 	}
-	
-	
+
+
 	/**
 	 * Replace Inserttags
 	 * @param string
@@ -284,19 +287,19 @@ class MetaModelNotelist extends \System
 		{
 			case 'form':
 				$objInput = Input::getInstance();
-				
+
 				$strValue = $objInput->post($element[1]);
-				
+
 				// fallback
 				if(strlen($strValue) < 1)
 				{
 					$strValue = $_POST[$element[1]];
 				}
-				
+
 				return $strValue;
-				
+
 			break;
-			
+
 			default: return false; break;
 		}
 
@@ -304,18 +307,24 @@ class MetaModelNotelist extends \System
 		return false;
 	}
 
-	
+
 	/**
 	 * Clear the notelist after submitting
 	 */
 	public function clearAfterFormSubmit($arrSubmitted)
 	{
+
 		if(!$GLOBALS['metamodels_notelist']['clearAfterFormSubmit'])
 		{
 			return $arrSubmitted;
 		}
-		
+
 		$arrSession = \Session::getInstance()->set('metamodelnotelist',array());
+	}
+
+	public function getServiceContainer()
+	{
+			return $GLOBALS['container']['metamodels-service-container'];
 	}
 
 }
